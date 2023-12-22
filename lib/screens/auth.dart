@@ -43,6 +43,10 @@ class _AuthScreenState extends State<AuthScreen> {
           email: _enteredEmail,
           password: _enteredPassword,
         );
+
+        setState(() {
+          _isAuthenticating = false;
+        });
       } else {
         final userCredential = await _firebase.createUserWithEmailAndPassword(
           email: _enteredEmail,
@@ -67,7 +71,7 @@ class _AuthScreenState extends State<AuthScreen> {
         });
 
         setState(() {
-          _isAuthenticating = true;
+          _isAuthenticating = false;
         });
       }
     } on FirebaseAuthException catch (error) {
@@ -80,7 +84,7 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
         );
         setState(() {
-          _isAuthenticating = true;
+          _isAuthenticating = false;
         });
       }
     }
